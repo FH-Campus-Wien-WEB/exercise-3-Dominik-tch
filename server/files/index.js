@@ -77,6 +77,16 @@ window.onload = function () {
          initialize them with a click handler that calls the 
          loadMovies(...) function above. */
       const genres = JSON.parse(xhr.responseText);
+      console.log("Hallo");
+      console.log(genres);
+      for (const genre of genres) {
+        new ElementBuilder("li")
+          .append(new ElementBuilder("button")
+            .text(genre)
+            .listener("click", () => loadMovies(genre))
+          )
+          .appendTo(listElement);
+      }
 
       /* When a first button exists, we click it to load all movies. */
       const firstButton = document.querySelector("nav button");

@@ -10,27 +10,91 @@ html, body {
   height: 100vh;
 }
 
+header {
+  grid-area: h;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Center the nav's header and list */
 nav {
   display: flex;
   flex-direction: column;
   align-items: center;
+  grid-area: n;
+}
+
+main {
+  grid-area: m;
+  overflow-y: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+footer {
+  grid-area: f;
 }
 
 /* navigation buttons have full width */
 nav button {
   width: 100%;
+  border: none;
+  border-radius: 8px;
+  font-size: 105%;
+  font-weight: 600;
+  color: #1e3a8a;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1); /* Sanfter Schatten */
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+nav button:hover {
+  background-color: #f8fafc;
+  box-shadow: 0 10px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+}
+
+nav button:active {
+  transform: translateY(0); /* Klick-Effekt: Button drückt sich nach unten */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 /* Remove unnecessary space and bullets from the lists */
 ul {
-  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0;
   margin: 16px;
   list-style-type: none;
 }
 
-/* Task 2.1. Lay out the childs of the 'body' using Grid Template Areas. */
+li {
+  padding: 2px;
+}
 
+/* Task 2.1. Lay out the childs of the 'body' using Grid Template Areas. */
+@media (min-width: 910px) {
+  body {
+    display: grid;
+
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: auto 1fr auto;
+
+    grid-template-areas:
+      "h h"
+      "n m"
+      "f f";  
+
+    height: 100vh;
+    margin: 0;
+  }
+}
 
 /* Task 3.1. Make the header element a flex container and center its children
    vertically and horizontally.
@@ -58,10 +122,11 @@ img {
 
 article {
   background-color: #ffffff;
+  flex: 1 1 500px;
   border-radius: 12px;
   margin-bottom: 25px;
   padding: 16px;
-  max-width: 600px;
+  max-width: 500px;
   box-shadow: 0 4px 12px rgba(255, 23, 23, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }

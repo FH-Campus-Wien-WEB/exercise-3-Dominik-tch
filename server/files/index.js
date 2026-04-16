@@ -59,10 +59,11 @@ function loadMovies(genre) {
       mainElement.append(`Daten konnten nicht geladen werden, Status ${xhr.status} - ${xhr.statusText}`);
     }
   }
-
   const url = new URL("/movies", location.href)
   /* Task 1.4. Add query parameter to the url if a genre is given */
-
+  if (genre) {
+    url.searchParams.append("genre", genre);
+  }
   xhr.open("GET", url)
   xhr.send()
 }
@@ -76,9 +77,13 @@ window.onload = function () {
       /* Task 1.3. Add the genre buttons to the listElement and 
          initialize them with a click handler that calls the 
          loadMovies(...) function above. */
+      new ElementBuilder("li")
+          .append(new ElementBuilder("button")
+            .text("ALL")
+            .listener("click", () => loadMovies())
+          )
+          .appendTo(listElement);
       const genres = JSON.parse(xhr.responseText);
-      console.log("Hallo");
-      console.log(genres);
       for (const genre of genres) {
         new ElementBuilder("li")
           .append(new ElementBuilder("button")

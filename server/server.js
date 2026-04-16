@@ -24,7 +24,6 @@ app.get('/genres', function (req, res) {
   }
   let uniqueGenreSet = new Set(duplicateGernreList);
   let uniqueGenreArray = [...uniqueGenreSet].sort();
-  console.log(uniqueGenreArray);
   res.send(uniqueGenreArray);
 })
 
@@ -33,8 +32,17 @@ app.get('/genres', function (req, res) {
    return only movies that have the given genre
  */
 app.get('/movies', function (req, res) {
-  let movies = Object.values(movieModel)
-  res.send(movies);
+  const movies = Object.values(movieModel);
+  if (req.query.genre) {
+    const filtered = movies.filter(movie =>
+    movie.Genres.includes(req.query.genre)
+    );
+    res.json(filtered);
+  } else {
+    let movies = Object.values(movieModel)
+    res.json(movies);
+  }
+  
 })
 
 // Configure a 'get' endpoint for a specific movie
